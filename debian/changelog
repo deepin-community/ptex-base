@@ -1,5 +1,200 @@
-template-repository (1.0-1) unstable; urgency=medium
+ptex-base (1:2.5-3.1) unstable; urgency=medium
 
-  * Initial release
+  * Non maintainer upload by the Reproducible Builds team.
+  * No source change upload to rebuild on buildd with .buildinfo files.
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Holger Levsen <holger@debian.org>  Tue, 14 Jun 2022 15:15:54 +0200
+
+ptex-base (1:2.5-3) unstable; urgency=medium
+
+  * QA upload.
+  * Set Maintainer to Debian QA Group.  (See: #836478)
+  * Drop alternate tetex-* dependencies.  (Closes: #601349, #601485)
+
+  [ Logan Rosen ]
+  * debian/compat: Bump to 9.  (Closes: #817632)
+  * debian/control: Build-depend on debhelper (>= 9).
+  * debian/rules:
+    - Use dh_prep instead of dh_clean -k.
+    - Add recommended build-arch and build-indep targets.
+
+ -- Andreas Beckmann <anbe@debian.org>  Fri, 09 Dec 2016 20:58:42 +0100
+
+ptex-base (1:2.5-2.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix "jbibtex-base: unowned file /usr/local/share/texmf/ls-R after
+    purge (policy 6.8, 9.1.2)": use dh_installtex in debian/rules, add
+    build-dependency on tex-common, add ${misc:Depends} to binary packages;
+    drop maintainer scripts.
+    (Closes: #669381)
+
+ -- gregor herrmann <gregoa@debian.org>  Fri, 03 Aug 2012 15:00:53 +0200
+
+ptex-base (1:2.5-2) unstable; urgency=low
+
+  * Bumped to Standards-Version: 3.7.3.
+  * Fixed various lintian warnings.
+
+ -- Masayuki Hatta (mhatta) <mhatta@debian.org>  Sat, 08 Dec 2007 09:08:53 +0900
+
+ptex-base (1:2.5-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Masayuki Hatta (mhatta) <mhatta@debian.org>  Wed, 05 Dec 2007 01:11:31 +0900
+
+ptex-base (1:2.5~beta6-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Masayuki Hatta (mhatta) <mhatta@debian.org>  Tue, 01 May 2007 20:42:15 +0900
+
+ptex-base (1:2.5~beta5-1) unstable; urgency=low
+
+  * New upstream release
+  * Acknowledged NMU - closes: #391200, #391209
+  * Support TeXLive - closes: #357196
+
+ -- Masayuki Hatta (mhatta) <mhatta@debian.org>  Sun, 15 Oct 2006 08:52:25 +0900
+
+ptex-base (1:2.4-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * postrm no longer calls mktexlsr if not present when purging.
+  (Closes: #391209)
+  * debian/control
+    + Fixed Build-Depends-Indep: debhelper to Build-Depends.
+    + Set Standards-VErsion to 3.7.2.
+
+ -- Arnaud Hocevar <arnaud@hocevar.net>  Sat,  7 Oct 2006 17:11:25 +0000
+
+ptex-base (1:2.4-1) unstable; urgency=low
+
+  * Works done at Codefest in Malaysia 2006.
+  * New upstream release - closes: #354567.
+  * Acknowledged NMU, thanks Luk - closes: #341001
+  * Don't install confusing *.txt in /usr/share/texmf - closes: #349538
+  * Bumped to Standards-Version: 3.6.2.2 (no physical changes).
+
+ -- Masayuki Hatta (mhatta) <mhatta@debian.org>  Sat,  4 Mar 2006 12:39:42 +0900
+
+ptex-base (1:2.3-1.1) unstable; urgency=high
+
+  * Non-maintainer upload.
+  * Remove trailing slash in mv commands (Closes: #341001).
+
+ -- Luk Claes <luk@debian.org>  Sat, 31 Dec 2005 16:04:56 +0100
+
+ptex-base (1:2.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Masayuki Hatta (mhatta) <mhatta@debian.org>  Sat, 12 Mar 2005 04:40:20 +0900
+
+ptex-base (1:2.1-2) unstable; urgency=low
+
+  * [control] changed Maintainer field.
+  * Bumped to Standards-Version: 3.6.1.
+  * Removed watch.
+
+ -- Masayuki Hatta (mhatta) <mhatta@debian.org>  Sat, 14 Feb 2004 17:20:53 +0900
+
+ptex-base (1:2.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Bumped to Standards-Version: 3.5.8.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Sat,  8 Mar 2003 02:23:09 +0900
+
+ptex-base (1:2.0-4) unstable; urgency=low
+
+  * Updated to Standards-Version: 3.5.6.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Sat, 31 Aug 2002 16:28:45 +0900
+
+ptex-base (1:2.0-3) unstable; urgency=low
+
+  * Reverted changes of 1:2.0-2.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Wed, 10 Apr 2002 22:22:43 +0900
+
+ptex-base (1:2.0-2) unstable; urgency=low
+
+  * Install JBibTeX files under the original BibTeX tree.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Sun, 10 Feb 2002 18:46:30 +0900
+
+ptex-base (1:2.0-1) unstable; urgency=low
+
+  * The "At Last I Am Free" release.
+  * New upstream release.
+  * The license has been changed to a modified BSD.  Now pTeX is DFSG-free!
+  * Also Mr. Matsui (the JBibTeX upstream) approved of changing his license 
+    to the new ASCII's.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Thu, 17 Jan 2002 22:47:42 +0900
+
+ptex-base (1:1.10+20010904-2) unstable; urgency=low
+
+  * Added amsptex support.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Mon,  8 Oct 2001 10:38:17 +0900
+
+ptex-base (1:1.10+20010904-1) unstable; urgency=low
+
+  * New upstream release (beta). - closes: #114041
+  * Build-Depends -> Build-Depends-Indep. - closes: #114040
+  * Seems the upstream changed their license to Modified BSD, so hopefully
+  this package will go to main soon.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Thu,  4 Oct 2001 10:12:10 +0900
+
+ptex-base (1:1.10-2) unstable; urgency=low
+
+  * Now contains *.tfm & *.vf.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Sun,  8 Jul 2001 11:16:48 +0900
+
+ptex-base (1:1.10-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Sat, 12 May 2001 15:47:33 +0900
+
+ptex-base (1:1.9-4) unstable; urgency=low
+
+  * The "Ain't That Good News" release.
+  * Initial release for Debian Project. - closes: #94839
+
+ -- Masayuki Hatta <mhatta@debian.org>  Sun, 22 Apr 2001 20:51:32 +0900
+
+ptex-base (1:1.9-3) unstable; urgency=low
+
+  * Move /usr/share/texmf/doc/* -> /usr/share/doc/texmf/*.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Sun, 15 Apr 2001 11:07:59 +0900
+
+ptex-base (1:1.9-2) unstable; urgency=low
+
+  * Modified copyright.*.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Sun,  8 Apr 2001 13:37:00 +0900
+
+ptex-base (1:1.9-1) unstable; urgency=low
+
+  * New maintainer: Masayuki Hatta <mhatta@debian.org>.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Sun,  8 Apr 2001 00:36:38 +0900
+
+ptex-base (1:1.9-0.1) unstable; urgency=low
+
+  * NMU.
+  * New upstream release.
+  * Re-packaged.
+
+ -- Masayuki Hatta <mhatta@debian.org>  Thu,  5 Apr 2001 09:26:32 +0900
+
+Local variables:
+mode: debian-changelog
+End:
