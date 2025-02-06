@@ -1,0 +1,6 @@
+ptex-base for Debian
+--------------------
+
+o Most of documents are placed under /usr/share/doc/texmf/ptex/.
+
+ -- Masayuki Hatta <mhatta@debian.org>, Thu,  5 Apr 2001 09:26:32 +0900

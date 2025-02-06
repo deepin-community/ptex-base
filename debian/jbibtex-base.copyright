@@ -3,11 +3,12 @@ Tue,  3 Apr 2001 22:25:18 +0900.
 
 It was downloaded from ftp://ftp.ascii.co.jp/pub/TeX/ascii-ptex/tetex/
 
-Upstream Author: ASCII Corp. <www-ptex@ascii.co.jp>
-
+Upstream Authors: Shouichi MATSUI <matsui@denken.or.jp>
+                  ASCII Corp. <www-ptex@ascii.co.jp>
+                    
 Copyright:
 
-Copyright (C) 1987, 1995 ASCII Corporation.
+Copyright (C) Shouichi MATSUI and ASCII Corporation.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

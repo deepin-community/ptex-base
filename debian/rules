@@ -1,4 +1,122 @@
 #!/usr/bin/make -f
+# debian/rules that uses debhelper.
+# GNU copyright 1997 to 1999 by Joey Hess.
+# Modified by Masayuki Hatta <mhatta@debian.org> for ptex-base.
 
-%:
-	dh $@
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+####################
+# Things you should change when new upstream version is available.
+
+# pTeX tarball
+PTEX_TEXMF_TARBALL=ptex-texmf-2.5.tar.gz
+
+####################
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	# Add here commands to configure the package.
+
+
+	touch configure-stamp
+
+build: build-arch build-indep
+build-arch: configure-stamp build-stamp
+build-indep: configure-stamp build-stamp
+build-stamp:
+	dh_testdir
+
+	# Add here commands to compile the package.
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+
+	# Add here commands to clean up after the build process.
+
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+
+	# Add here commands to install the package into debian/ptex-base.
+	tar xfz $(PTEX_TEXMF_TARBALL) -C $(CURDIR)/debian/ptex-base/usr/share
+	mv $(CURDIR)/debian/ptex-base/usr/share/ptex-texmf $(CURDIR)/debian/ptex-base/usr/share/texmf
+
+	# Install amsptex.ini and ptex-ams.tex.
+	install -m 644 $(CURDIR)/debian/amsptex.ini $(CURDIR)/debian/ptex-base/usr/share/texmf/ptex/plain/config
+	install -m 644 $(CURDIR)/debian/ptex-ams.tex $(CURDIR)/debian/ptex-base/usr/share/texmf/ptex/plain/base
+
+	# Separate jbibtex-base.
+	dh_movefiles --source=debian/ptex-base
+
+	# Move /usr/share/texmf/fonts/*/ptex to /usr/share/texmf/fonts/*/dvips
+	mv $(CURDIR)/debian/ptex-base/usr/share/texmf/fonts/tfm/ptex/ \
+	  $(CURDIR)/debian/ptex-base/usr/share/texmf/fonts/tfm/dvips
+	mv $(CURDIR)/debian/ptex-base/usr/share/texmf/fonts/vf/ptex/ \
+	  $(CURDIR)/debian/ptex-base/usr/share/texmf/fonts/vf/dvips
+
+	# Move /usr/share/texmf/doc/* to /usr/share/doc/texmf/*
+	mv $(CURDIR)/debian/ptex-base/usr/share/texmf/doc/ptex \
+	  $(CURDIR)/debian/ptex-base/usr/share/doc/texmf/ptex
+	mv $(CURDIR)/debian/jbibtex-base/usr/share/texmf/doc/jbibtex \
+	  $(CURDIR)/debian/jbibtex-base/usr/share/doc/texmf/jbibtex
+
+	# Remove unnecessary files and directories.
+	rm -rf $(CURDIR)/debian/ptex-base/usr/share/texmf/jbibtex/
+	rm -rf $(CURDIR)/debian/ptex-base/usr/share/texmf/doc
+	rm -rf $(CURDIR)/debian/jbibtex-base/usr/share/texmf/doc
+	rm -rf $(CURDIR)/debian/ptex-base/usr/share/texmf/ptex/platex/base/.cvsignore
+	rm -rf $(CURDIR)/debian/ptex-base/usr/share/texmf/COPYRIGHT*
+
+# Build architecture-independent files here.
+binary-indep: build install
+	dh_testdir -i
+	dh_testroot -i
+#	dh_installdebconf -i
+	dh_installdocs -i
+	# Move /usr/share/texmf/*.txt to /usr/share/doc/ptex-base (after that directory created by dh_installdocs)
+	mv $(CURDIR)/debian/ptex-base/usr/share/texmf/README.txt \
+	  $(CURDIR)/debian/ptex-base/usr/share/doc/ptex-base
+#	dh_installexamples -i
+#	dh_installmenu -i
+#	dh_installlogrotate -i
+#	dh_installemacsen -i
+#	dh_installpam -i
+#	dh_installmime -i
+#	dh_installinit -i
+#	dh_installcron -i
+#	dh_installman -i
+#	dh_installinfo -i
+#	dh_undocumented -i
+	dh_installchangelogs -i debian/ptex-base/usr/share/texmf/Changes.txt
+	# We should remove this at this timing
+	rm -rf $(CURDIR)/debian/ptex-base/usr/share/texmf/Changes*
+	dh_installtex -i
+	dh_link -i
+	dh_strip -i
+	dh_compress -i
+	dh_fixperms -i
+#	dh_makeshlibs -i 
+	dh_installdeb -i
+#	dh_perl -i
+	dh_shlibdeps -i
+	dh_gencontrol -i
+	dh_md5sums -i
+	dh_builddeb -i
+
+# Build architecture-dependent files here.
+binary-arch: build install
+# We have nothing to do by default.
+
+
+binary: binary-indep binary-arch
+.PHONY: build build-arch build-indep clean binary-indep binary-arch binary install configure
